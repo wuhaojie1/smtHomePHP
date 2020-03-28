@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Cblink\Region\RegionServiceProvider::class,
 
         /*
          * Application Service Providers...

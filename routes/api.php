@@ -27,10 +27,22 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('edit', 'ApiController@userMsgUpdate');
 //    Route::post('userInfo', 'ApiController@getUserInfo');
 
+    //products
     Route::get('products', 'ProductController@index');
     Route::get('products/{id}', 'ProductController@show');
     Route::post('products', 'ProductController@store');
     Route::put('products/{id}', 'ProductController@update');
     Route::delete('products/{id}', 'ProductController@destroy');
+
+    //shippingAdress
+    Route::get('shippingAddress','ShippingaddressController@index');
+    Route::get('shippingAddress/{id}', 'ShippingaddressController@show');
+    Route::post('shippingAddress', 'ShippingaddressController@store');
+    Route::put('shippingAddress/{id}', 'ShippingaddressController@update');
+    Route::delete('shippingAddress/{id}', 'ShippingaddressController@destroy');
+
+    //area
+    Route::get('area', 'AreaController@areaList');
+
 });
 

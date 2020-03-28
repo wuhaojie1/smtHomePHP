@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b90ae76c7b1b72e1709cfc58a05e9e2f",
+    "content-hash": "adec7571c5af0b17fe1a92441816ebe6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -63,6 +63,54 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
+        },
+        {
+            "name": "cblink/region",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cblink/region.git",
+                "reference": "2730bac7a3d11e43931eb48a6ae7a2eb9e924e7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cblink/region/zipball/2730bac7a3d11e43931eb48a6ae7a2eb9e924e7b",
+                "reference": "2730bac7a3d11e43931eb48a6ae7a2eb9e924e7b",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require-dev": {
+                "laravel/framework": "5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cblink\\Region\\RegionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cblink\\Region\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HanSon",
+                    "email": "h@hanc.cc"
+                }
+            ],
+            "time": "2018-09-05T02:21:48+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

@@ -47,9 +47,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+    //关联产品
     public function products()
     {
         return $this->hasMany(Product::class);
     }
+    //关联用户收货地址
+    public function shippingadress()
+    {
+        return $this->hasMany(shippingaddress::class);
+    }
+
 }
