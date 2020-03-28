@@ -24,6 +24,7 @@ Route::post('register', 'ApiController@register');
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('logout', 'ApiController@logout');
     Route::post('user', 'ApiController@getAuthUser');
+    Route::post('edit', 'ApiController@userMsgUpdate');
 //    Route::post('userInfo', 'ApiController@getUserInfo');
 
     Route::get('products', 'ProductController@index');

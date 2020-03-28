@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -81,6 +82,39 @@ class ApiController extends Controller
         return response()->json([
             'user' => $user
         ]);
+    }
+
+    public function userMsgUpdate(Request $request)
+    {
+        $db = DB::table('users');
+
+        $db->where('id', '=', $request->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+            'headimg' => $request->headimg,
+            'country' => $request->country
+
+        ]);
+
+//        $user = $this->users()->find($request->id);
+//
+//        $updated = $user->fill($request->all())->save();
+//
+        return response()->json([
+            'success' => true
+        ]);
+        /*if ($updated) {
+            return response()->json([
+                'success' => $request
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, users could not be updated'
+            ], 500);
+        }*/
     }
 
     public function getUserInfo(Request $request)
