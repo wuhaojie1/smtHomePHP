@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 Route::post('login', 'ApiController@login');
 Route::post('register', 'ApiController@register');
@@ -35,11 +35,11 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::delete('products/{id}', 'ProductController@destroy');
 
     //shippingAdress
-    Route::get('shippingAddress','ShippingaddressController@index');
-    Route::get('shippingAddress/{id}', 'ShippingaddressController@show');
-    Route::post('shippingAddress', 'ShippingaddressController@store');
-    Route::put('shippingAddress/{id}', 'ShippingaddressController@update');
-    Route::delete('shippingAddress/{id}', 'ShippingaddressController@destroy');
+    Route::get('shippingAddress/list','ShippingaddressController@index');
+    Route::post('shippingAddress/detail', 'ShippingaddressController@show');
+    Route::post('shippingAddress/new', 'ShippingaddressController@store');
+    Route::post('shippingAddress/update', 'ShippingaddressController@update');
+    Route::post('shippingAddress/delete', 'ShippingaddressController@destroy');
 
     //area
     Route::get('area', 'AreaController@areaList');

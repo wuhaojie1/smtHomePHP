@@ -22,27 +22,28 @@ class ShippingaddressController extends Controller
         return $this->user
             ->shippingadress()
             ->get([
+                'id',
                 'isdefault',
                 'provinceid',
                 'cityid',
                 'countyid',
                 'address',
                 'name',
-                'contactphone'
+                'phone'
             ])
             ->toArray();
     }
 
     //根据id查询
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $shippingaddress = $this->user->shippingadress()->find($id);
+        $shippingaddress = $this->user->shippingadress()->find($request->id);
 
         if (!$shippingaddress) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, product with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
@@ -56,9 +57,8 @@ class ShippingaddressController extends Controller
             'name' => 'required',
             'provinceid' => 'required|integer',
             'cityid' => 'required|integer',
-            'countyid' => 'required|integer',
             'address' => 'required',
-            'contactphone' => 'requiredproduct'
+            'phone' => 'required'
         ]);
 
         $shippingaddress = new shippingaddress();
@@ -68,7 +68,7 @@ class ShippingaddressController extends Controller
         $shippingaddress->cityid = $request->cityid;
         $shippingaddress->countyid = $request->countyid;
         $shippingaddress->address = $request->address;
-        $shippingaddress->contactphone = $request->contactphone;
+        $shippingaddress->phone = $request->phone;
 
         if ($this->user->shippingadress()->save($shippingaddress))
             return response()->json([
@@ -82,14 +82,14 @@ class ShippingaddressController extends Controller
             ], 500);
     }
     //删除
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $shippingadress = $this->user->shippingadress()->find($id);
+        $shippingadress = $this->user->shippingadress()->find($request->id);
 
         if (!$shippingadress) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, shippingadress with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, shippingadress with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
@@ -113,14 +113,14 @@ class ShippingaddressController extends Controller
 //            ->save();
 //    }
     //修改
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $shippingadress = $this->user->shippingadress()->find($id);
+        $shippingadress = $this->user->shippingadress()->find($request->id);
 
         if (!$shippingadress) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, shippingadress with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, shippingadress with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
