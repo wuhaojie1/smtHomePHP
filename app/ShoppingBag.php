@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ShoppingBag extends Model
 {
     //
     protected $fillable = [
-        'goodsName',
-        'price',
-        'num',
         'imgSrc',
+        'goodsName',
+        'num',
+        'price',
         'goodsTitle',
         'goodsDetailMsg',
+        'provinceid',
+        'cityid',
+        'countyid',
         'deliveryTime',
-        'type',
-        'new',
     ];
-
 }

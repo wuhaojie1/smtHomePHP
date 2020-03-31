@@ -104,14 +104,7 @@ class ShippingaddressController extends Controller
             ], 500);
         }
     }
-//    //设为默认
-//    public function setDefault(Request $request, $id)
-//    {
-//        $shippingadress = $this->user->shippingadress()->find($id);
-//
-//        $updated = $shippingadress->fill($request->all())
-//            ->save();
-//    }
+
     //修改
     public function update(Request $request)
     {

@@ -57,5 +57,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(shippingaddress::class);
     }
+    //关联用户购物车
+    public function shoppingBag()
+    {
+        return $this->hasMany(shoppingBag::class );
+    }
 
 }

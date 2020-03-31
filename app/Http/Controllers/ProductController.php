@@ -15,40 +15,75 @@ class ProductController extends Controller
         $this->user = JWTAuth::parseToken()->authenticate();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->user
-            ->products()
-            ->get(['name', 'price', 'quantity'])
-            ->toArray();
+        if ($request->type) {
+            $products = $this->user->products()->where('type', $request->type)
+                ->orderBy('id', 'desc')
+                ->get();
+            if (!$products) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Sorry, product with type ' . $request->type . ' cannot be found'
+                ], 400);
+            }
+
+            return $products;
+
+        } else {
+            return $this->user
+                ->products()
+                ->get([
+                    'id',
+                    'goodsName',
+                    'price',
+                    'num',
+                    'imgSrc',
+                    'goodsTitle',
+                    'goodsDetailMsg',
+                    'deliveryTime',
+                    'type',
+                    'category'
+                ])
+                ->toArray();
+        }
+
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $product = $this->user->products()->find($id);
+        $product = $this->user->products()->find($request->id);
 
         if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, product with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
         return $product;
     }
 
+    //新增
     public function store(Request $request)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             'name' => 'required',
             'price' => 'required|integer',
             'quantity' => 'required|integer'
-        ]);
+        ]);*/
 
         $product = new Product();
-        $product->name = $request->name;
+        $product->goodsName = $request->goodsName;
         $product->price = $request->price;
-        $product->quantity = $request->quantity;
+        $product->num = $request->num;
+        $product->imgSrc = $request->imgSrc;
+        $product->goodsTitle = $request->goodsTitle;
+        $product->goodsDetailMsg = $request->goodsDetailMsg;
+        $product->deliveryTime = $request->deliveryTime;
+        $product->type = $request->type;
+        $product->new = $request->new;
+        $product->category = $request->category;
 
         if ($this->user->products()->save($product))
             return response()->json([
@@ -62,14 +97,15 @@ class ProductController extends Controller
             ], 500);
     }
 
-    public function update(Request $request, $id)
+    //修改
+    public function update(Request $request)
     {
-        $product = $this->user->products()->find($id);
+        $product = $this->user->products()->find($request->id);
 
         if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, product with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
@@ -88,14 +124,15 @@ class ProductController extends Controller
         }
     }
 
-    public function destroy($id)
+    //删除
+    public function destroy(Request $request)
     {
-        $product = $this->user->products()->find($id);
+        $product = $this->user->products()->find($request->id);
 
         if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+                'message' => 'Sorry, product with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
