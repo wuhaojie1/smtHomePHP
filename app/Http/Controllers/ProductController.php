@@ -64,6 +64,20 @@ class ProductController extends Controller
         return $product;
     }
 
+    public function getGoodsMsg($id)
+    {
+        $product = $this->user->products()->find($id);
+//        if (!$product) {
+//            return response()->json([
+//                'success' => false,
+//                'message' => 'Sorry, product with id ' . $id . ' cannot be found'
+//            ], 400);
+//        }
+
+        return $product;
+    }
+
+
     //新增
     public function store(Request $request)
     {

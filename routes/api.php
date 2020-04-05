@@ -51,5 +51,13 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('shopping/delete', 'ShoppingBagController@destroy');//删
     Route::post('shopping/update', 'ShoppingBagController@update');//改
 
+    //order
+    Route::get('order/orderList', 'OrderController@orderList');//查询订单列表
+    Route::post('order/detail', 'OrderController@detail');//订单详情
+    Route::post('order/bill', 'OrderController@newOrder');//新增订单
+    Route::post('order/delete', 'OrderController@deleteOrder');//删除订单
+    Route::post('order/edit', 'OrderController@editOrder');//编辑订单
+
+
 });
 

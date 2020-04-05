@@ -41,6 +41,7 @@ class ShoppingBagController extends Controller
                     'goodsTitle',
                     'goodsDetailMsg',
                     'deliveryTime',
+                    'goodsId',
                 ])
                 ->toArray();
         }
@@ -63,10 +64,11 @@ class ShoppingBagController extends Controller
         $ShoppingBag->price = $request->price;
         $ShoppingBag->goodsTitle = $request->goodsTitle;
         $ShoppingBag->goodsDetailMsg = $request->goodsDetailMsg;
-        $ShoppingBag->provinceid = $request->provinceid;
-        $ShoppingBag->cityid = $request->cityid;
-        $ShoppingBag->countyid = $request->countyid;
+//        $ShoppingBag->provinceid = $request->provinceid;
+//        $ShoppingBag->cityid = $request->cityid;
+//        $ShoppingBag->countyid = $request->countyid;
         $ShoppingBag->deliveryTime = $request->deliveryTime;
+        $ShoppingBag->goodsId = $request->goodsId;
 
         if ($this->user->shoppingBag()->save($ShoppingBag))
             return response()->json([
@@ -89,7 +91,7 @@ class ShoppingBagController extends Controller
         if (!$ShoppingBag) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, shippingadress with id ' . $request->id . ' cannot be found'
+                'message' => 'Sorry, shoppingBag with id ' . $request->id . ' cannot be found'
             ], 400);
         }
 
@@ -104,6 +106,23 @@ class ShoppingBagController extends Controller
             ], 500);
         }
     }
+//    //删除
+//    public function billSuccess($id)
+//    {
+//        $ShoppingBag = $this->user->shoppingBag()->find($id);
+//
+//        return $ShoppingBag->delete();
+//        /*if ($ShoppingBag->delete()) {
+//            return response()->json([
+//                'success' => true
+//            ]);
+//        } else {
+//            return response()->json([
+//                'success' => false,
+//                'message' => 'ShoppingBag could not be deleted'
+//            ], 500);
+//        }*/
+//    }
 
     //修改
     public function update(Request $request)
