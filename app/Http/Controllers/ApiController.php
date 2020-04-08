@@ -124,4 +124,52 @@ class ApiController extends Controller
             'userInfo' => $request
         ]);
     }
+
+    public function productsList (Request $request){
+        $products = DB::table('products');
+        if($request->type){
+            $tempData = $products->where('type', $request->type)
+                ->orderBy('id', 'desc')
+                ->get();
+            if (!$tempData) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Sorry, product with type ' . $request->type . ' cannot be found'
+                ], 400);
+            }
+            return $tempData;
+        } else{
+            return $products->get([
+                    'id',
+                    'goodsName',
+                    'price',
+                    'num',
+                    'imgSrc',
+                    'goodsTitle',
+                    'goodsDetailMsg',
+                    'deliveryTime',
+                    'type',
+                    'category'
+                ])
+                ->toArray();
+        }
+
+    }
+
+
+    public function productsDetail(Request $request){
+        $products = DB::table('products');
+
+        $tempData = $products->find($request->id);
+        if (!$tempData) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, product with id ' . $request->id . ' cannot be found'
+            ], 400);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $tempData
+        ]);
+    }
 }

@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'ApiController@login');
 Route::post('register', 'ApiController@register');
-Route::post('products/list', 'ProductController@index');
-Route::post('products/detail', 'ProductController@show');
+Route::post('products/list', 'ApiController@productsList');
+Route::post('products/detail', 'ApiController@productsDetail');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('logout', 'ApiController@logout');
